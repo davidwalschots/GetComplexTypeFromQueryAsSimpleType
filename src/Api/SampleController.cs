@@ -6,12 +6,14 @@ namespace Api;
 [Route("sample")]
 public class SampleController : ControllerBase
 {
-    
-    [HttpGet("basic")]
-    public IActionResult GetWithNoCustomization(SomeWrapperType wrapper)
-        => Ok(wrapper.Value);
+    [HttpPost("basic")]
+    public IActionResult GetWithNoCustomization(Input wrapper) => Ok(wrapper.Prop.Value);
 
     [HttpGet("from-query")]
-    public IActionResult GetWithFromQuery([FromQuery]SomeWrapperType wrapper)
-        => Ok(wrapper.Value);
+    public IActionResult GetWithFromQuery([FromQuery] SomeWrapperType wrapper) => Ok(wrapper.Value);
+}
+
+public class Input
+{
+    public SomeWrapperType Prop { get; set; }
 }
